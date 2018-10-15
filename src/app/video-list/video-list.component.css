@@ -1,0 +1,16 @@
+.active {
+  background-color: lightcoral;
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px 0px lightgrey;
+  color: white;
+  transition: 0.25s ease;
+}
+
+.video {
+  cursor: pointer;
+  width: 85%;
+  height: 30px;
+  padding: 3px 5px;
+  line-height: 33px;
+  transition: 0.25s ease;
+}
