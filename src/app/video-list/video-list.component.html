@@ -1,6 +1,6 @@
 <div class="video-list-item">
   <div *ngFor="let video of videos; let i = index">
-    <div class="video" (click)="selectedVideo = video" [class.active]="selectedVideo?.id === video.id">
+    <div class="video" (click)="videoClicked(video)" [class.active]="selectedVideo?.id === video.id">
       <app-video-preview [video]="video"></app-video-preview>
     </div>
   </div>

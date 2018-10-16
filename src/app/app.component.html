@@ -1,6 +1,6 @@
 <div class="grid">
-  <app-video-list [videos]="videos"></app-video-list>
-  <app-video-embedder></app-video-embedder>
+  <app-video-list (videoSelection)="selectedVideo = $event" [videos]="videos" [selectedVideo]="selectedVideo"></app-video-list>
+  <app-video-embedder [selectedVideo]="selectedVideo"></app-video-embedder>
   <app-view-breakdown></app-view-breakdown>
   <app-view-filter></app-view-filter>
 </div>

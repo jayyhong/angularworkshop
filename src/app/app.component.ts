@@ -12,5 +12,6 @@ export class AppComponent {
   title = 'app';
 
   videos: Video[] = videos;
+  selectedVideo: Video;;
 
 }
