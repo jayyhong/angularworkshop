@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-
-import { videos } from './sample-data';
-import { Video } from './app.types';
+import { Video, Filter } from './app.types';
+import { VideoLoaderService } from './services/video-loader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,19 @@ import { Video } from './app.types';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'workShopApp';
 
-  videos: Video[] = videos;
-  selectedVideo: Video;;
+  videos: Observable<Video[]>;
+  selectedVideo: Video;
+  filter: Filter;
+
+  constructor(private videoListService: VideoLoaderService) {
+    //this is for async pipe (even thought using it on an http call is pretty much useless)
+    this.videos = this.videoListService.getVideos();
+  }
+
+  ngOnInit() {
+
+  }
 
 }

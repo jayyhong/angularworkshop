@@ -1,6 +1,1 @@
-<div class="grid">
-  <app-video-list (videoSelection)="selectedVideo = $event" [videos]="videos" [selectedVideo]="selectedVideo"></app-video-list>
-  <app-video-embedder [selectedVideo]="selectedVideo"></app-video-embedder>
-  <app-view-breakdown></app-view-breakdown>
-  <app-view-filter></app-view-filter>
-</div>
+<router-outlet></router-outlet>

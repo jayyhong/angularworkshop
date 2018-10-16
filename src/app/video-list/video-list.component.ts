@@ -7,13 +7,14 @@ import { Video } from '../app.types';
   styleUrls: ['./video-list.component.css']
 })
 export class VideoListComponent implements OnInit {
-
   @Input() videos: Video[];
   @Input() selectedVideo: Video;
 
   @Output() videoSelection = new EventEmitter<Video>();
+  
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -1,0 +1,6 @@
+<div class="grid">
+  <app-video-list (videoSelection)="setSelectedVideo($event)" [videos]="videos | async" [selectedVideo]="selectedVideo | async" ></app-video-list>
+  <app-view-filter (filterChanged)="filter = $event"></app-view-filter>
+  <app-video-embedder [selectedVideo]="selectedVideo | async"></app-video-embedder>
+  <app-view-breakdown [filter]="filter" [views]="(selectedVideo | async)?.viewDetails"></app-view-breakdown>
+</div>
