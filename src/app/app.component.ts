@@ -17,7 +17,7 @@ export class AppComponent {
 
   constructor(private videoListService: VideoLoaderService) {
     //this is for async pipe (even thought using it on an http call is pretty much useless)
-    this.videos = this.videoListService.getVideos();
+    // this.videos = this.videoListService.getVideos();
   }
 
   ngOnInit() {

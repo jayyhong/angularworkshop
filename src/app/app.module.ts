@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { VideoListComponent } from './video-list/video-list.component';
@@ -11,6 +12,7 @@ import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app.routing.module';
+import { AppState, videoListReducer, filterReducer, selectedVideoIdReducer } from './state';
 
 
 @NgModule({
@@ -27,7 +29,12 @@ import { AppRoutingModule } from './app.routing.module';
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot<AppState>({
+      filter: filterReducer,
+      selectedVideoId: selectedVideoIdReducer,
+      videoList: videoListReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

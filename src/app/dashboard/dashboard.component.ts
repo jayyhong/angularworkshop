@@ -4,6 +4,9 @@ import { VideoLoaderService } from '../services/video-loader.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, map } from 'rxjs/internal/operators';
+import { Store } from '@ngrx/store';
+import { AppState, VideoListArrived, SelectVideo, FilterChange } from '../state';
+import { StateService } from '../state.service';
 
 const videoIdQueryParam = 'videoId';
 
@@ -13,18 +16,26 @@ const videoIdQueryParam = 'videoId';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  title = 'workShopApp';
 
-  videos: Observable<Video[]>;
-  selectedVideo: Observable<Video>;
-  filter: Filter;
+  videos = this.stateManager.videos;
+  selectedVideo = this.stateManager.selectedVideo;
+  filteredViews = this.stateManager.filteredViews;
 
-  constructor(private videoListService: VideoLoaderService, private route: ActivatedRoute, private router: Router) {
-    this.videos = this.videoListService.getVideos();
-    this.selectedVideo = this.route.queryParams.pipe(
+  constructor(
+    private videoListService: VideoLoaderService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store<AppState>,
+    private stateManager: StateService
+  ) {
+    videoListService.getVideos()
+      .pipe(map(v1 => new VideoListArrived(v1)))
+      .subscribe(a => store.dispatch(a));
+    this.route.queryParams.pipe(
       map(params => params[videoIdQueryParam]),
-      switchMap((id: string) => this.videos.pipe(map(vl => vl.find(v => v.id === id))))
+      map(id => new SelectVideo(id))
     )
+      .subscribe(a => store.dispatch(a));
   }
 
   ngOnInit() {
@@ -33,6 +44,10 @@ export class DashboardComponent {
 
   setSelectedVideo(v: Video) {
     this.router.navigate([], { queryParams: { [videoIdQueryParam]: v.id }, queryParamsHandling: 'merge' });
+  }
+
+  setFilter(f: Filter) {
+    this.store.dispatch(new FilterChange(f));
   }
 
 }

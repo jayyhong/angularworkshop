@@ -10,7 +10,7 @@ export class VideoListComponent implements OnInit {
   @Input() videos: Video[];
   @Input() selectedVideo: Video;
 
-  @Output() videoSelection = new EventEmitter<Video>();
+  @Output() selection = new EventEmitter<Video>();
   
 
   constructor() {
@@ -20,7 +20,7 @@ export class VideoListComponent implements OnInit {
   }
 
   videoClicked(video: Video) {
-    this.videoSelection.emit(video);
+    this.selection.emit(video);
   }
 
 }
